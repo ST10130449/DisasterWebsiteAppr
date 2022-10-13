@@ -42,7 +42,7 @@ namespace DisasterWebsiteAppr.Controllers
                 context.Categories.Add(data);
                 context.SaveChanges();
                 TempData["message"] = "Category Saved!";
-                return RedirectToAction("Index", "Categories");
+                return RedirectToAction("Index", "Category");
             }
             else
             {
