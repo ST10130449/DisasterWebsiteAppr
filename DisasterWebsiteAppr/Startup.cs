@@ -1,4 +1,5 @@
 using DisasterWebsiteAppr.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,20 @@ namespace DisasterWebsiteAppr
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.ExpireTimeSpan = TimeSpan.FromMinutes(60 * 1);
+                    option.LoginPath = "/User/Login";
+                    //option.AccessDeniedPath = "/Dashboard/Index";
+                });
+            services.AddSession(option =>
+            {
+                option.IdleTimeout = TimeSpan.FromMinutes(5);
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -24,10 +24,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Index" asp-action="Category">Category</a>
                         </li>
-                       @* <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                       <li class="nav-item">
+                           <span class="navbar-text d-grid gap-2 d-md-block">
+                               @if (User.Identity.IsAuthenticated)
+                               {
+                                   <span>Welcome to </span><span>@User.Identity.Name</span>
+                                   <a class="btn btn-primary " asp-action="LogOut" asp-controller="User">Sign Out</a>
+                               }
+                           </span>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
                         </li>*@
                     </ul>
