@@ -1,4 +1,5 @@
 ﻿using DisasterWebsiteAppr.Data;
+using DisasterWebsiteAppr.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,29 @@ namespace DisasterWebsiteAppr.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = new Category()
+                {
+                    CName = model.CName
+                };
+
+                context.Categories.Add(data);
+                context.SaveChanges();
+                TempData["message"] = "Category Saved!";
+                return RedirectToAction("Index", "Categories");
+            }
+            else
+            {
+                TempData["message"] = "Empty field can't be submited!";
+                return View(model);
+            }
+
         }
 
 
