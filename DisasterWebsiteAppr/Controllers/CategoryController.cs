@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DisasterWebsiteAppr.Controllers
 {
+    //Caregory Controller
     public class CategoryController : Controller
     {
 
